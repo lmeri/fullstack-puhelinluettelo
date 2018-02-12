@@ -6,6 +6,7 @@ const cors = require('cors')
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use(express.static('build'))
 morgan.token('content', function (req, res) { 
     return JSON.stringify(req.body);
 })
@@ -36,9 +37,9 @@ let persons = [
     }
 ]
   
-app.get('/', (req, res) => {
-    res.send('')
-})
+app.get('/', function(req, res){
+    res.sendFile(__dirname + '/index.html');
+});
 
 app.get('/info', (req, res) => {
     let datetime = new Date();
